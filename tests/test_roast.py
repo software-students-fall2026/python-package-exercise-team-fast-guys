@@ -179,14 +179,21 @@ class Test:
         assert actual == "Your blood has turned into espresso."
 
     def test_roast_coffee_boundaries(self):
-        """
-        Verify each band boundary gives the expected roast.
-        """
-        assert pyroast.roast_coffee(0) == "No coffee? You run on pure denial."
-        assert pyroast.roast_coffee(1) == pyroast.roast_coffee(2)
-        assert pyroast.roast_coffee(3) == pyroast.roast_coffee(4)
-        assert pyroast.roast_coffee(5) == pyroast.roast_coffee(100)
-        assert pyroast.roast_coffee(2) != pyroast.roast_coffee(3)
+        """Verify exact roast messages at each band boundary."""
+        actual = pyroast.roast_coffee(0)
+        assert actual == "No coffee? You run on pure denial."
+        actual = pyroast.roast_coffee(1)
+        assert actual == "Less than 2 cups? Still on the free trial of adulthood."
+        actual = pyroast.roast_coffee(2)
+        assert actual == "Less than 2 cups? Still on the free trial of adulthood."
+        actual = pyroast.roast_coffee(3)
+        assert actual == "Your coffee needs a coffee."
+        actual = pyroast.roast_coffee(4)
+        assert actual == "Your coffee needs a coffee."
+        actual = pyroast.roast_coffee(5)
+        assert actual == "Your blood has turned into espresso."
+        actual = pyroast.roast_coffee(100)
+        assert actual == "Your blood has turned into espresso."
 
     def test_roast_coffee_rejects_negative(self):
         """
@@ -209,3 +216,7 @@ class Test:
             pyroast.roast_coffee(None)
         with pytest.raises(TypeError):
             pyroast.roast_coffee(False)
+        with pytest.raises(TypeError):
+            pyroast.roast_coffee(True)
+        with pytest.raises(TypeError):
+            pyroast.roast_coffee(2.0)
