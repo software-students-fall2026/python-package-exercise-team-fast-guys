@@ -10,8 +10,25 @@ pyroast is a lighthearted Python package designed to roast users based on their 
 ## PyPI Package Link
 
 ## Installation
-1. Install from PyPI with "pip install pyroast"
-2. Once installed, import the package into your code with "import pyroast"
+
+Install from PyPI:
+
+```bash
+pip install pyroast
+```
+
+Then import the functions you want:
+
+```python
+from pyroast import roast_gpa, roast_height, roast_sleep, roast_coffee, roast_age
+```
+
+or use the package namespace:
+
+```python
+import pyroast
+print(pyroast.roast_sleep(5))
+```
 
 ## Usage
 
@@ -67,35 +84,58 @@ TypeError: If age is non-numeric or a boolean.
 
 ## Program Examples
 
+All examples assume `from pyroast import *` or the explicit import above.
+
 ### High GPA
 
+```python
 print(roast_gpa(3.95))
-
-Output: "I bet you've never known sleep before"
+# I bet you've never known sleep before
+```
 
 ### Tall height
 
+```python
 print(roast_height(6.8))
-
-Output: "You might as well just be a tree!"
+# You might as well just be a tree!
+```
 
 ### 0 hours sleep
 
+```python
 print(roast_sleep(0))
-
-Output: "Zero hours? Your eye bags have eye bags."
+# Zero hours? Your eye bags have eye bags.
+```
 
 ### A lot of coffee
 
+```python
 print(roast_coffee(5))
-
-Output: "Your blood type is officially Espresso."
+# Your blood has turned into espresso.
+```
 
 ### Mid 20s
 
+```python
 print(roast_age(25))
+# Quarter-life crisis mode: fully engaged.
+```
 
-Output: "Quarter-life crisis mode: fully engaged."
+### Invalid input
+
+Every function validates its argument and raises a standard Python error you can catch:
+
+```python
+try:
+    roast_sleep(30)
+except ValueError as e:
+    print(e)   # hours must be between 0 and 24, got 30
+
+try:
+    roast_age("twenty")
+except TypeError as e:
+    print(e)   # Age should be a whole number of years, instead got str
+```
 
 ## Example Program
 
@@ -116,6 +156,8 @@ For a complete working example that demonstrates all five package functions in a
     2. Create a class using `Test` as a prefix and enter methods within it with `test_` as a prefix.
 2. Run `pytest` to run tests in the `tests` directory.
 
+Pull requests will build and test with Github Actions.
+
 ## Team members
 
 - [Robert Fang](https://github.com/rfang1224)
@@ -127,3 +169,4 @@ For a complete working example that demonstrates all five package functions in a
 - [Pranay Engineer](https://github.com/PranayEng) 
 
 - [Daniyal Malik](https://github.com/DaniyalMlk) 
+
