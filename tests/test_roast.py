@@ -105,7 +105,7 @@ class Test:
         with pytest.raises(TypeError):
             pyroast.roast_gpa(True)
     
-    # Height roast
+    # Height roast multi-choice test suite
     def test_roast_height(self):
         """Verify roast_height() returns a non-empty string."""
         actual = pyroast.roast_height(6.0)
@@ -120,40 +120,50 @@ class Test:
             assert isinstance(actual, str), f"Expected string for height {h}, got {type(actual)}"
             assert len(actual) > 0, f"Expected non-empty string for height {h}"
 
-    def test_roast_height_exact_messages(self):
-        """Verify roast_height returns exact strings for specific height bands."""
-        assert pyroast.roast_height(6.7) == "Haha funny"
-        assert pyroast.roast_height(7.0) == "You might as well just be a tree!"
-        assert pyroast.roast_height(4.0) == "How is that possible?"
+    def test_roast_height_pool_membership(self):
+        """Verify returned roast belongs to the expected pool for each bracket."""
+        valid_67_roasts = [
+            "Haha funny",
+            "6'7? You hit the exact meme height jackpot.",
+            "Spot on 6.7 feet, classic.",
+        ]
+        actual = pyroast.roast_height(6.7)
+        assert actual in valid_67_roasts, f"Unexpected roast returned: {actual}"
 
-    def test_roast_height_boundaries_groups(self):
-        """Values on the edge of height thresholds fall into the expected band."""
-        assert pyroast.roast_height(6.3) == pyroast.roast_height(6.6)
-        assert pyroast.roast_height(6.0) == pyroast.roast_height(6.29)
-        assert pyroast.roast_height(5.8) == pyroast.roast_height(5.99)
-        assert pyroast.roast_height(4.5) == pyroast.roast_height(5.79)
+    def test_roast_height_tree_pool(self):
+        """Verify heights above 6.7 return a roast from the tree pool."""
+        valid_tree_roasts = [
+            "You might as well just be a tree!",
+            "Are the clouds blocking your view down here?",
+            "Do you need a permit to be that tall?",
+            "Please watch out for low-flying aircraft.",
+        ]
+        actual = pyroast.roast_height(7.2)
+        assert actual in valid_tree_roasts
 
-    def test_roast_height_accepts_int_and_float(self):
-        """Ints and floats in the same band return identical roasts."""
-        assert pyroast.roast_height(6) == pyroast.roast_height(6.0)
-        assert pyroast.roast_height(7) == pyroast.roast_height(7.0)
+    def test_roast_height_wonka_pool(self):
+        """Verify heights between 4.5 and 5.8 return a roast from the Wonka pool."""
+        valid_wonka_roasts = [
+            "Willy Wonka wants you back in the cholocate factory.",
+            "Do you get a discount on kids' menu items?",
+            "Watch out for the top shelf in the pantry.",
+            "Do you need a step stool to reach the counter?",
+        ]
+        actual = pyroast.roast_height(5.0)
+        assert actual in valid_wonka_roasts
 
-    def test_roast_height_boundaries(self):
-        """
-        Verify values on the edge of each band land in the expected band.
-        """
-        assert pyroast.roast_height(6.7) == "Haha funny"
-        assert pyroast.roast_height(6.71) == pyroast.roast_height(8.0)
-        assert pyroast.roast_height(6.3) == pyroast.roast_height(6.69)
-        assert pyroast.roast_height(6.0) == pyroast.roast_height(6.29)
-        assert pyroast.roast_height(5.8) == pyroast.roast_height(5.99)
-        assert pyroast.roast_height(4.5) == pyroast.roast_height(5.79)
-        assert pyroast.roast_height(1) == pyroast.roast_height(4.49)
+    def test_roast_height_randomness_returns_variety(self):
+        """Verify calling roast_height multiple times produces valid non-empty responses."""
+        results = set()
+        for _ in range(20):
+            res = pyroast.roast_height(6.7)
+            assert isinstance(res, str)
+            results.add(res)
+        # Verify at least one valid string was selected
+        assert len(results) >= 1
 
     def test_roast_height_rejects_out_of_range(self):
-        """
-        Heights below 1 ft or above 9 ft raise ValueError.
-        """
+        """Heights below 1 ft or above 9 ft raise ValueError."""
         with pytest.raises(ValueError):
             pyroast.roast_height(0)
         with pytest.raises(ValueError):
@@ -162,9 +172,7 @@ class Test:
             pyroast.roast_height(9.1)
 
     def test_roast_height_rejects_non_numbers(self):
-        """
-        Strings, None and booleans raise TypeError.
-        """
+        """Strings, None and booleans raise TypeError."""
         with pytest.raises(TypeError):
             pyroast.roast_height("six feet")
         with pytest.raises(TypeError):

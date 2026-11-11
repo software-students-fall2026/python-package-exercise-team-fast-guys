@@ -1,3 +1,5 @@
+import random
+
 def roast_gpa(gpa: float) -> str:
     if isinstance(gpa, bool) or not isinstance(gpa, (int, float)):
         raise TypeError(f"gpa must be a number, got {type(gpa).__name__}")
@@ -25,31 +27,99 @@ def roast_gpa(gpa: float) -> str:
         return "A gpa that low actually exists? Behold the 8th wonder of the world!"
 
 
+
 def roast_height(height: float) -> str:
     """Roast the user based on their height in feet.
 
     height must be a number between 1 and 9 inclusive.
     Raises TypeError for non-numeric input and ValueError for out-of-range values.
     """
-    if isinstance(height, bool) or not isinstance(height, (int, float)):
-        raise TypeError(f"height must be a number, got {type(height).__name__}")
-    if height < 1 or height > 9:
-        raise ValueError(f"height must be between 1 and 9 feet, got {height}")
+
+    if isinstance(height, bool):
+        raise TypeError(
+            f"height must be a number, got {type(height).__name__}"
+        )
+
+    if not isinstance(height, (int, float)):
+        raise TypeError(
+            f"height must be a number, got {type(height).__name__}"
+        )
+
+    if height < 1:
+        raise ValueError(
+            f"height must be between 1 and 9 feet, got {height}"
+        )
+
+    if height > 9:
+        raise ValueError(
+            f"height must be between 1 and 9 feet, got {height}"
+        )
+
+    tree_roasts = [
+        "You might as well just be a tree!",
+        "Are the clouds blocking your view down here?",
+        "Do you need a permit to be that tall?",
+        "Please watch out for low-flying aircraft.",
+    ]
+
+    funny_67_roasts = [
+        "Haha funny",
+        "6'7? You hit the exact meme height jackpot.",
+        "Spot on 6.7 feet, classic.",
+    ]
+
+    nba_roasts = [
+        "Too short to make it to the NBA. Almost there.",
+        "Benchwarmer status in the league at best.",
+        "So close to basketball glory, yet so far.",
+        "Have you considered volleyball instead?",
+    ]
+
+    six_foot_roasts = [
+        "Yeah, sure you are.",
+        "Tinder profile says 6'0, reality says 5'10.",
+        "Are those shoes adding an extra two inches?",
+        "Barely snuck into the six-foot club, didn't you?",
+    ]
+
+    weather_roasts = [
+        "How's the weather down there?",
+        "Standing right on the edge of average.",
+        "Neither short nor tall, just conveniently baseline.",
+        "You blend into every crowd seamlessly.",
+    ]
+
+    wonka_roasts = [
+        "Willy Wonka wants you back in the cholocate factory.",
+        "Do you get a discount on kids' menu items?",
+        "Watch out for the top shelf in the pantry.",
+        "Do you need a step stool to reach the counter?",
+    ]
+
+    impossible_roasts = [
+        "How is that possible?",
+        "Are you measuring in yards by accident?",
+        "Is this height scientifically verified?",
+        "Did you shrink in the laundry?",
+    ]
+
 
     if height > 6.7:
-        return "You might as well just be a tree!"
+        selected_pool = tree_roasts
     elif height == 6.7:
-        return "Haha funny"
+        selected_pool = funny_67_roasts
     elif height >= 6.3:
-        return "Too short to make it to the NBA. Almost there."
+        selected_pool = nba_roasts
     elif height >= 6.0:
-        return "Yeah, sure you are."
+        selected_pool = six_foot_roasts
     elif height >= 5.8:
-        return "How's the weather down there?"
+        selected_pool = weather_roasts
     elif height >= 4.5:
-        return "Willy Wonka wants you back in the cholocate factory."
+        selected_pool = wonka_roasts
     else:
-        return "How is that possible?"
+        selected_pool = impossible_roasts
+
+    return random.choice(selected_pool)
 
 def roast_coffee(cups: int) -> str:
     """Roast the user based on how many cups of coffee they drink a day.
