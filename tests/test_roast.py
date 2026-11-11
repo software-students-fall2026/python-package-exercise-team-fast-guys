@@ -84,6 +84,26 @@ class Test:
         '''
         actual = pyroast.roast_gpa(0.0)
         assert actual == "A gpa that low actually exists? Behold the 8th wonder of the world!"
+
+    def test_roast_gpa_bounds(self):
+        '''
+        Verify roast_gpa() raises ValueError for values out of the bounds of 0.0 o 4.0
+        '''
+        with pytest.raises(ValueError):
+            pyroast.roast_gpa(-0.1)
+        with pytest.raises(ValueError):
+            pyroast.roast_gpa(4.1)
+
+    def test_roast_gpa_non_numbers(self):
+        '''
+        Verify roast_gpa() raises TypeError for Strings, None, and boolean
+        '''
+        with pytest.raises(TypeError):
+            pyroast.roast_gpa("3.5")
+        with pytest.raises(TypeError):
+            pyroast.roast_gpa(None)
+        with pytest.raises(TypeError):
+            pyroast.roast_gpa(True)
     
     # Height roast
     def test_roast_height(self):
@@ -106,7 +126,7 @@ class Test:
         assert pyroast.roast_height(7.0) == "You might as well just be a tree!"
         assert pyroast.roast_height(4.0) == "How is that possible?"
 
-    def test_roast_height_boundaries(self):
+    def test_roast_height_boundaries_groups(self):
         """Values on the edge of height thresholds fall into the expected band."""
         assert pyroast.roast_height(6.3) == pyroast.roast_height(6.6)
         assert pyroast.roast_height(6.0) == pyroast.roast_height(6.29)
