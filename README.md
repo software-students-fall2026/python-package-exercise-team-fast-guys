@@ -116,6 +116,7 @@ print(roast_gpa(3.95))
 
 ```python
 print(roast_height(6.8))
+# one of several roasts for this height, for example:
 # You might as well just be a tree!
 ```
 
