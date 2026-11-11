@@ -15,7 +15,7 @@ pyroast is a lighthearted Python package designed to roast users based on their 
 Install from PyPI:
 
 ```bash
-pip install team-fast-pyroast==0.1.0
+pip install team-fast-pyroast==0.1.1
 ```
 
 Then import the functions you want:
