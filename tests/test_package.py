@@ -31,3 +31,14 @@ class TestPackageExports:
         """Calling through the package namespace returns a roast."""
         result = pyroast.roast_sleep(7)
         assert isinstance(result, str) and result
+
+    def test_version_matches_pyproject(self):
+        """__version__ stays in sync with the version published from pyproject.toml."""
+        import pathlib
+        import re
+        root = pathlib.Path(__file__).resolve().parent.parent
+        text = (root / "pyproject.toml").read_text()
+        declared = re.search(r'^version\s*=\s*"([^"]+)"', text, re.M).group(1)
+        assert pyroast.__version__ == declared, (
+            f"pyroast.__version__ is {pyroast.__version__} but pyproject.toml says {declared}"
+        )
