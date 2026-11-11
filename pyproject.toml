@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pyroast"
+name = "team-fast-pyroast"
 version = "0.1.0"
 description = "A lighthearted Python package that roasts you based on your stats."
 readme = "README.md"
