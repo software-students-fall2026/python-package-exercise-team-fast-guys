@@ -8,14 +8,14 @@
 pyroast is a lighthearted Python package designed to roast users based on their personal statistics. By taking info like GPA, height, sleep duration, age, and coffee intake, the package evaluates each value to return customized, sarcastic commentary.
 
 ## PyPI Package Link
-https://pypi.org/project/team-fast-pyroast/0.1.0/
+[Install PyRoast from PyPI](https://pypi.org/project/team-fast-pyroast/0.1.0/)
 
 ## Installation
 
 Install from PyPI:
 
 ```bash
-pip install team-fast-pyroast==0.1.0
+pip install team-fast-pyroast==0.1.1
 ```
 
 Then import the functions you want:
@@ -165,8 +165,8 @@ For a complete working example that demonstrates all five package functions in a
 
 ### Setting Up Virtual Environment and Dependencies
 1. Install `pipenv` if you have not yet using `pip install --user pipenv`.
-2. Install dependencis and set up virtual environment using `pipenv shell`.
-3. Using `pipenv install`, install project dependencies, including `pytest` for testing.
+2. Install dependencies and set up virtual environment using `pipenv install`.
+3. Activate the virtual environment using `pipenv shell`.
 4. To install the package locally for development run `pipenv install -e .`.
 
 ### Adding and Running Tests
