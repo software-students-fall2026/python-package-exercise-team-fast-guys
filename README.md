@@ -36,17 +36,29 @@ print(pyroast.roast_sleep(5))
 
 #### Evaluates a student's Grade Point Average (GPA) and returns a customized roast.
 
-Parameters: gpa (float | int): The GPA score (e.g., 3.86).
+Parameters: gpa (float | int): The GPA score (e.g., 3.86) between 0.0 and 4.0 inclusive.
 
 Returns: str — A roast string based on the GPA.
+
+Raises:
+
+TypeError: If gpa is not a float nor an int.
+
+ValueError: If gpa is less than 0.0 or if gpa is greater than 4.0.
 
 ### roast_height
 
 #### Generates a roast based on height measured in feet.
 
-Parameters: height (float | int): Height in feet (e.g., 6.0, 5.8).
+Parameters: height (float | int): Height in feet (e.g., 6.0, 5.8) where height is between 1 and 9 feet inclusive.
 
 Returns: str — A roast string evaluating the input height.
+
+Raises:
+
+TypeError: If the input is not an integer or a float.
+
+ValueError: If the height is less than 1 or greater than 9.
 
 ### roast_sleep
 
@@ -66,9 +78,15 @@ ValueError: If hours is less than 0 or greater than 24.
 
 #### Evaluates daily caffeine intake and returns a roast based on the number of coffee cups consumed.
 
-Parameters: cups (int | float): Number of cups of coffee drank today.
+Parameters: cups (int): Number of cups of coffee drank today.
 
 Returns: str — A roast assessing caffeine dependence.
+
+Raises:
+
+TypeError: If the input is not an integer.
+
+ValueError: If the number of cups is negative.
 
 ### roast_age
 
@@ -142,19 +160,26 @@ except TypeError as e:
 For a complete working example that demonstrates all five package functions in a single script, see:
 * 📄 [**Example Script (`__main__.py`)**](./src/pyroast/__main__.py)
 
-
 ## Development setup
 
 ### Setting Up Virtual Environment and Dependencies
 1. Install `pipenv` if you have not yet using `pip install --user pipenv`.
-2. Set up virtual environment using `pipenv shell`.
+2. Install dependencis and set up virtual environment using `pipenv shell`.
 3. Using `pipenv install`, install project dependencies, including `pytest` for testing.
+4. To install the package locally for development run `pipenv install -e .`.
 
 ### Adding and Running Tests
 1. Add a new Python file in the `tests` directory for your added method/unit.
     1. Import `pytest` and `pyroast`.
     2. Create a class using `Test` as a prefix and enter methods within it with `test_` as a prefix.
 2. Run `pytest` to run tests in the `tests` directory.
+
+### Building the Package
+To build the package and generate distribution files in the `dist/` directory, run:
+
+```bash
+pipenv run python -m build
+```
 
 Pull requests will build and test with Github Actions.
 
