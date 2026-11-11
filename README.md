@@ -8,7 +8,7 @@
 pyroast is a lighthearted Python package designed to roast users based on their personal statistics. By taking info like GPA, height, sleep duration, age, and coffee intake, the package evaluates each value to return customized, sarcastic commentary.
 
 ## PyPI Package Link
-[Install PyRoast from PyPI](https://pypi.org/project/team-fast-pyroast/0.1.0/)
+[Install PyRoast from PyPI](https://pypi.org/project/team-fast-pyroast/0.1.1/)
 
 ## Installation
 
