@@ -13,7 +13,7 @@ or use the module namespace::
 
 from .pyroast import roast_age, roast_coffee, roast_gpa, roast_height, roast_sleep
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "roast_age",
