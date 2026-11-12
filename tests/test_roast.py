@@ -107,13 +107,13 @@ class Test:
     
     # Height roast multi-choice test suite
     def test_roast_height(self):
-        """Verify roast_height() returns a non-empty string."""
+        '''Verify roast_height() returns a non-empty string.'''
         actual = pyroast.roast_height(6.0)
         assert isinstance(actual, str), f"Expected string, got {type(actual)}"
         assert len(actual) > 0, "Expected non-empty string"
 
     def test_roast_height_thresholds(self):
-        """Verify roast_height() across different height thresholds."""
+        '''Verify roast_height() across different height thresholds.'''
         sample_heights = [7.0, 6.7, 6.4, 6.1, 5.9, 5.0, 3.0]
         for h in sample_heights:
             actual = pyroast.roast_height(h)
@@ -121,7 +121,7 @@ class Test:
             assert len(actual) > 0, f"Expected non-empty string for height {h}"
 
     def test_roast_height_pool_membership(self):
-        """Verify returned roast belongs to the expected pool for each bracket."""
+        '''Verify returned roast belongs to the expected pool for each bracket.'''
         valid_67_roasts = [
             "Haha funny",
             "6'7? You hit the exact meme height jackpot.",
@@ -131,7 +131,7 @@ class Test:
         assert actual in valid_67_roasts, f"Unexpected roast returned: {actual}"
 
     def test_roast_height_tree_pool(self):
-        """Verify heights above 6.7 return a roast from the tree pool."""
+        '''Verify heights above 6.7 return a roast from the tree pool.'''
         valid_tree_roasts = [
             "You might as well just be a tree!",
             "Are the clouds blocking your view down here?",
@@ -142,9 +142,9 @@ class Test:
         assert actual in valid_tree_roasts
 
     def test_roast_height_wonka_pool(self):
-        """Verify heights between 4.5 and 5.8 return a roast from the Wonka pool."""
+        '''Verify heights between 4.5 and 5.8 return a roast from the Wonka pool.'''
         valid_wonka_roasts = [
-            "Willy Wonka wants you back in the cholocate factory.",
+            "Willy Wonka wants you back in the chocolate factory.",
             "Do you get a discount on kids' menu items?",
             "Watch out for the top shelf in the pantry.",
             "Do you need a step stool to reach the counter?",
@@ -153,7 +153,7 @@ class Test:
         assert actual in valid_wonka_roasts
 
     def test_roast_height_randomness_returns_variety(self):
-        """Verify calling roast_height multiple times produces valid non-empty responses."""
+        '''Verify calling roast_height multiple times produces valid non-empty responses.'''
         results = set()
         for _ in range(20):
             res = pyroast.roast_height(6.7)
@@ -162,8 +162,41 @@ class Test:
         # Verify at least one valid string was selected
         assert len(results) >= 1
 
+    def test_roast_height_default_style_fallbacks(self):
+        '''Verify omitted, empty, None, or uppercase 'standard' returns a standard roast.'''
+        valid_67_roasts = [
+            "Haha funny",
+            "6'7? You hit the exact meme height jackpot.",
+            "Spot on 6.7 feet, classic.",
+        ]
+        for style_input in ("standard", "STANDARD", "  standard  ", "", "   ", None):
+            actual = pyroast.roast_height(6.7, style=style_input)
+            assert actual in valid_67_roasts, f"Unexpected roast for style={style_input!r}: {actual}"
+
+    def test_roast_height_poem_style(self):
+        '''Verify style='poem' returns a multi-line poem from the expected bracket.'''
+        valid_67_poems = [
+            (
+                "Six point seven on the dot,\n"
+                "You hit the internet's favorite spot.\n"
+                "No taller, shorter, low, or high—\n"
+                "Just a walking meme passing by."
+            ),
+        ]
+        for style_input in ("poem", "POEM", "  Poem  "):
+            actual = pyroast.roast_height(6.7, style=style_input)
+            assert actual in valid_67_poems
+
+    def test_roast_height_poem_thresholds(self):
+        '''Verify poem style works across all height brackets.'''
+        sample_heights = [7.0, 6.7, 6.4, 6.1, 5.9, 5.0, 3.0]
+        for h in sample_heights:
+            actual = pyroast.roast_height(h, style="poem")
+            assert isinstance(actual, str)
+            assert "\n" in actual, f"Expected multi-line poem for height {h}, got {actual!r}"
+
     def test_roast_height_rejects_out_of_range(self):
-        """Heights below 1 ft or above 9 ft raise ValueError."""
+        '''Heights below 1 ft or above 9 ft raise ValueError.'''
         with pytest.raises(ValueError):
             pyroast.roast_height(0)
         with pytest.raises(ValueError):
@@ -172,13 +205,24 @@ class Test:
             pyroast.roast_height(9.1)
 
     def test_roast_height_rejects_non_numbers(self):
-        """Strings, None and booleans raise TypeError."""
+        '''Strings, None and booleans raise TypeError.'''
         with pytest.raises(TypeError):
             pyroast.roast_height("six feet")
         with pytest.raises(TypeError):
             pyroast.roast_height(None)
         with pytest.raises(TypeError):
             pyroast.roast_height(True)
+
+    def test_roast_height_rejects_invalid_style(self):
+        '''Unrecognized style strings raise ValueError and non-strings raise TypeError.'''
+        with pytest.raises(ValueError):
+            pyroast.roast_height(6.0, style="haiku")
+        with pytest.raises(ValueError):
+            pyroast.roast_height(6.0, style="rap")
+        with pytest.raises(TypeError):
+            pyroast.roast_height(6.0, style=123)
+        with pytest.raises(TypeError):
+            pyroast.roast_height(6.0, style=True)
 
     # Coffee roast
     def test_roast_coffee(self):
