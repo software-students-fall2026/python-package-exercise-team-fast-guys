@@ -198,3 +198,55 @@ def roast_age(age: int) -> str:
     else:
         return "Did your mom's womb come with a computer?"
 
+def roast_screen_time(time: float) -> str:
+    if isinstance(time, bool) or not isinstance(time, (int, float)):
+        raise TypeError(f"time must be a number, got {type(time).__name__}")
+    
+    if time < 0 or time > 24.0:
+        raise ValueError(f"time must be between 0 and 24.0, got {time}")
+
+    no_life_roasts = [
+        "I just know that you have no life",
+        "Very productive? Doubt it",
+        "Sleep must be an urban myth to you",
+        "Bro does photosynthesis with screen light"
+    ]
+
+    streamer_roasts = [
+        "Dropped out to become a streamer?",
+        "Quick question, ever heard of grass before?",
+        "Your screen is costing half of the power grid",
+        "Your glasses need glasses"
+    ]
+
+    college_roasts = [
+        "Let me guess, college student?",
+        "Either you're a CS major or a business major",
+        "Another one has joined the doom scrollers",
+        "Let me guess, Gen Z?"
+    ]
+
+    less_roasts = [
+        "Tiger parent?",
+        "Are you on probation?",
+        "Bro probably has only 3 apps on his phone",
+        "What did you do to get your parents that mad?"
+    ]
+
+    old_roasts = [
+        "I bet you don't even know what AI is",
+        "Do you still use those old dusty textbooks?",
+        "My grandma has a bigger online personality than you",
+        "Did your parents not let you have a phone until you were 18?"
+    ]
+
+    if time >= 18.0:
+        return random.choice(no_life_roasts)
+    elif time >= 12.0:
+        return random.choice(streamer_roasts)
+    elif time >= 8.0:
+        return random.choice(college_roasts)
+    elif time >= 4.0:
+        return random.choice(less_roasts)
+    else:
+        return random.choice(old_roasts)

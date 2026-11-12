@@ -248,3 +248,116 @@ class Test:
             pyroast.roast_coffee(True)
         with pytest.raises(TypeError):
             pyroast.roast_coffee(2.0)
+
+    #Test roast_screen_time
+    def test_roast_screen_time(self):
+        '''
+        Verify roast_screen_time() returns a non-empty string.
+        '''
+        actual = pyroast.roast_screen_time(20)
+        assert isinstance(actual, str), f"Expected roast_screen_time() to return a string. Instead, it returned {actual}"
+        assert len(actual) > 0, f"Expected roast_screen_time() not to be empty. Instead, it returned a string with {len(actual)} characters"
+
+    def test_roast_screen_time_thresholds(self):
+        '''
+        Verify roast_screen_time() across various thresholds
+        '''
+        sample_time = [1.0, 5.0, 10.0, 13.0, 19.0, 4.0]
+        for s in sample_time:
+            actual = pyroast.roast_screen_time(s)
+            assert isinstance(actual, str), f"Expected roast_screen_time() to return a string for time {s}. Instead, it returned {actual}"
+            assert len(actual) > 0, f"Expected roast_screen_time() not to be empty for time {s}. Instead, it returned a string with {len(actual)} characters"
+    
+    def test_roast_screen_time_nolife(self):
+        '''
+        Verify roast_screen_time() returns the expected message for a screen time greater than or equal to 18 hours
+        '''
+        no_life_roasts = [
+            "I just know that you have no life",
+            "Very productive? Doubt it",
+            "Sleep must be an urban myth to you",
+            "Bro does photosynthesis with screen light"
+        ]
+
+        actual = pyroast.roast_screen_time(19.0)
+        assert actual in no_life_roasts
+
+    def test_roast_screen_time_streamer(self):
+        '''
+        Verify roast_screen_time() returns the expected message for a screen time greater than or equal to 12 hours
+        '''
+
+        streamer_roasts = [
+            "Dropped out to become a streamer?",
+            "Quick question, ever heard of grass before?",
+            "Your screen is costing half of the power grid",
+            "Your glasses need glasses"
+        ]
+    
+        actual = pyroast.roast_screen_time(13.0)
+        assert actual in streamer_roasts
+
+    def test_roast_screen_time_college(self):
+        '''
+        Verify roast_screen_time() returns the expected message for a screen time greater than or equal to 8 hours
+        '''
+    
+        college_roasts = [
+            "Let me guess, college student?",
+            "Either you're a CS major or a business major",
+            "Another one has joined the doom scrollers",
+            "Let me guess, Gen Z?"
+        ]
+        
+        actual = pyroast.roast_screen_time(9.0)
+        assert actual in college_roasts
+
+    def test_roast_screen_time_less(self):
+        '''
+        Verify roast_screen_time() returns the expected message for a screen time greater than or equal to 4 hours
+        '''
+
+        less_roasts = [
+            "Tiger parent?",
+            "Are you on probation?",
+            "Bro probably has only 3 apps on his phone",
+            "What did you do to get your parents that mad?"
+        ]
+            
+        actual = pyroast.roast_screen_time(5.0)
+        assert actual in less_roasts
+
+    def test_roast_screen_time_old(self):
+        '''
+        Verify roast_screen_time() returns the expected message for a screen time greater than or equal to 0 hours
+        '''
+    
+        old_roasts = [
+            "I bet you don't even know what AI is",
+            "Do you still use those old dusty textbooks?",
+            "My grandma has a bigger online personality than you",
+            "Did your parents not let you have a phone until you were 18?"
+        ]
+                
+        actual = pyroast.roast_screen_time(2.0)
+        assert actual in old_roasts
+
+    def test_roast_screen_time_bounds(self):
+        '''
+        Verify roast_screen_time() raises ValueError for values out of the bounds of 0.0 to 24.0
+        '''
+        with pytest.raises(ValueError):
+            pyroast.roast_screen_time(-0.1)
+        with pytest.raises(ValueError):
+            pyroast.roast_screen_time(24.1)
+    
+    def test_roast_screen_time_non_numbers(self):
+        '''
+        Verify roast_screen_time() raises TypeError for Strings, None, and boolean
+        '''
+        with pytest.raises(TypeError):
+            pyroast.roast_screen_time("3.5")
+        with pytest.raises(TypeError):
+            pyroast.roast_screen_time(None)
+        with pytest.raises(TypeError):
+            pyroast.roast_screen_time(True)
