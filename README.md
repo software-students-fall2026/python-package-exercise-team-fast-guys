@@ -51,15 +51,18 @@ ValueError: If gpa is less than 0.0 or if gpa is greater than 4.0.
 
 #### Generates a roast based on height measured in feet.
 
-Parameters: height (float | int): Height in feet (e.g., 6.0, 5.8) where height is between 1 and 9 feet inclusive.
+Parameters:
 
-Returns: str — A roast string evaluating the input height.
+- height (float | int): Height in feet (e.g., 6.0, 5.8) where height is between 1 and 9 feet inclusive.
+- style (str | None, optional): Format of the roast — `"standard"` (default, also used if empty or `None`) for a one-liner, or `"poem"` for a short verse.
+
+Returns: str — A roast string or multi-line poem evaluating the input height.
 
 Raises:
 
-TypeError: If the input is not an integer or a float.
+TypeError: If height is not an integer or a float (or is a boolean), or if style is not a string or None.
 
-ValueError: If the height is less than 1 or greater than 9.
+ValueError: If the height is less than 1 or greater than 9, or if style is not `"standard"` or `"poem"`.
 
 ### roast_sleep
 
@@ -112,12 +115,22 @@ print(roast_gpa(3.95))
 # I bet you've never known sleep before
 ```
 
-### Tall height
+### Tall height (standard)
 
 ```python
 print(roast_height(6.8))
 # one of several roasts for this height, for example:
 # You might as well just be a tree!
+```
+
+### Tall height (poem)
+
+```python
+print(roast_height(6.8, style="poem"))
+# Your head is brushing past the clouds,
+# You tower over earthly crowds.
+# Before you take another stride,
+# Please check for planes on either side.
 ```
 
 ### 0 hours sleep
