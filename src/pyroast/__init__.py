@@ -11,9 +11,9 @@ or use the module namespace::
     print(pyroast.roast_gpa(3.9))
 """
 
-from .pyroast import roast_age, roast_coffee, roast_gpa, roast_height, roast_sleep
+from .pyroast import roast_age, roast_coffee, roast_gpa, roast_height, roast_sleep, roast_screen_time
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 __all__ = [
     "roast_age",
@@ -21,5 +21,6 @@ __all__ = [
     "roast_gpa",
     "roast_height",
     "roast_sleep",
+    "roast_screen_time",
     "__version__",
 ]

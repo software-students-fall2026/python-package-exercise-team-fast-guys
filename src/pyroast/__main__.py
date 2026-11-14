@@ -37,8 +37,21 @@ def main():
             print("input your height in feet as a float or integer")
             print()
             height = float(input("What is your height?: "))
+
+            print("choose your style of roast:")
+            print("1: standard")
+            print("2: poem")
+            style = input("What is your choice?: ")
+
+            if style == "1":
+                sty = "standard"
+            elif style == "2":
+                sty = "poem"
+            else:
+                print("Invalid")
+                sty = "standard"
         
-            result = pyroast.roast_height(height)
+            result = pyroast.roast_height(height, sty)
         
             print(result)
             print()

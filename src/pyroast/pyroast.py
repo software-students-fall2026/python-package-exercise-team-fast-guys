@@ -8,25 +8,51 @@ def roast_gpa(gpa: float) -> str:
     if gpa < 0 or gpa > 4.0:
         raise ValueError(f"gpa must be between 0 and 4.0, got {gpa}")
 
-    if gpa >= 3.9:
-        return "I bet you've never known sleep before"
-    elif gpa >= 3.5:
-        return "I smell wasted potential"
-    elif gpa >= 3.0:
-        return "Are you even trying? Or is college just a networking event for you?"
-    elif gpa >=2.5:
-        return "At this point, it might be better to give up"
-    elif gpa >=2.0:
-        return "I see you gave up, smartest choice you've ever made"
-    elif gpa >= 1.5:
-        return "Gonna drop out soon?"
-    elif gpa >= 1.0:
-        return "McDonalds is always hiring"
-    elif gpa >= 0.5:
-        return "Your GPA is lower than my room temperature"
-    elif gpa >= 0.0:
-        return "A gpa that low actually exists? Behold the 8th wonder of the world!"
+    smart_roasts = [
+        "I bet you've never known sleep before",
+        "no network, no friends, just grind",
+        "your favorite past time must be studying",
+        "your blood must be pure energy drinks"
+    ]
 
+    average_roasts = [
+        "I smell wasted potential",
+        "mid doesn't cut it, you're just a statistic",
+        "yeah sure, you and everyone else",
+        "blends into the crowd so well, you become invisible"
+    ]
+
+    below_roasts = [
+        "Are you even trying? Or is college just a networking event for you?",
+        "let me guess, business major?",
+        "let me guess, you think you're street smart and not book smart?",
+        "its a slipery slope, but you love living on the edge huh?"
+    ]
+
+    low_roasts = [
+        "at this point it would be better to drop out",
+        "McDonalds is always hiring",
+        "have you ever said I'm smart in my own way before?",
+        "honestly, it may be harder to get this low than it is to be average"
+    ]
+
+    bad_roasts = [
+        "I see you gave up, smartest choice you ever made",
+        "A gpa that low actually exists? Behold, the 8th wonder of the world",
+        "maybe you could be a youtuber?",
+        "how did you make it this far anyways?"
+    ]
+
+    if gpa >= 3.9:
+        return random.choice(smart_roasts)
+    elif gpa >= 3.5:
+        return random.choice(average_roasts)
+    elif gpa >= 2.0:
+        return random.choice(below_roasts)
+    elif gpa >= 1.0:
+        return random.choice(low_roasts)
+    else:
+        return random.choice(bad_roasts)
 
 
 ROAST_DATA: dict[str, dict[str, list[str]]] = {
