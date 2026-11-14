@@ -5,23 +5,23 @@
 [![build and test](https://github.com/software-students-fall2026/python-package-exercise-team-fast-guys/actions/workflows/build.yml/badge.svg)](https://github.com/software-students-fall2026/python-package-exercise-team-fast-guys/actions/workflows/build.yml)
 
 ## Description
-pyroast is a lighthearted Python package designed to roast users based on their personal statistics. By taking info like GPA, height, sleep duration, age, and coffee intake, the package evaluates each value to return customized, sarcastic commentary.
+pyroast is a lighthearted Python package designed to roast users based on their personal statistics. By taking info like GPA, height, sleep duration, age, screen time, and coffee intake, the package evaluates each value to return customized, sarcastic commentary.
 
 ## PyPI Package Link
-[Install PyRoast from PyPI](https://pypi.org/project/team-fast-pyroast/0.1.1/)
+[Install PyRoast from PyPI](https://pypi.org/project/team-fast-pyroast/0.1.2/)
 
 ## Installation
 
 Install from PyPI:
 
 ```bash
-pip install team-fast-pyroast==0.1.1
+pip install team-fast-pyroast==0.1.2
 ```
 
 Then import the functions you want:
 
 ```python
-from pyroast import roast_gpa, roast_height, roast_sleep, roast_coffee, roast_age
+from pyroast import roast_gpa, roast_height, roast_sleep, roast_coffee, roast_age, roast_screen_time
 ```
 
 or use the package namespace:
@@ -39,11 +39,11 @@ print(pyroast.roast_sleep(5))
 
 Parameters: gpa (float | int): The GPA score (e.g., 3.86) between 0.0 and 4.0 inclusive.
 
-Returns: str — A roast string based on the GPA.
+Returns: str — A randomly selected roast string based on the GPA.
 
 Raises:
 
-TypeError: If gpa is not a float nor an int.
+TypeError: If gpa is not a float nor an int or is a boolean.
 
 ValueError: If gpa is less than 0.0 or if gpa is greater than 4.0.
 
@@ -88,7 +88,7 @@ Returns: str — A roast assessing caffeine dependence.
 
 Raises:
 
-TypeError: If the input is not an integer.
+TypeError: If the input is not an integer or is a boolean.
 
 ValueError: If the number of cups is negative.
 
@@ -102,7 +102,21 @@ Returns: str — A roast string based on the user's age bracket.
 
 Raises:
 
-TypeError: If age is non-numeric or a boolean.
+TypeError: If age is not an integer or is a boolean.
+
+### roast_screen_time
+
+#### Roasts the user based on their daily screen time
+
+Parameters: time (float | int): Number of hours spend on screens per day between 0 and 24 inclusive
+
+Returns: str — A randomly selected roast string based on the user's screen time
+
+Raises:
+
+TypeError: If time is non-numeric or a boolean.
+
+ValueError: If time is less than 0 or greater than 24.
 
 ## Program Examples
 
@@ -112,6 +126,7 @@ All examples assume `from pyroast import *` or the explicit import above.
 
 ```python
 print(roast_gpa(3.95))
+# One of several possible roasts:
 # I bet you've never known sleep before
 ```
 
@@ -154,6 +169,15 @@ print(roast_age(25))
 # Quarter-life crisis mode: fully engaged.
 ```
 
+
+### High Screen Time
+
+```python
+print(roast_screen_time(24))
+# One of several possible roasts:
+# I just know that you have no life
+```
+
 ### Invalid input
 
 Every function validates its argument and raises a standard Python error you can catch:
@@ -172,7 +196,7 @@ except TypeError as e:
 
 ## Example Program
 
-For a complete working example that demonstrates all five package functions in a single script, see:
+For a complete working example that demonstrates all six package functions in a single script, see:
 * 📄 [**Example Script (`__main__.py`)**](./src/pyroast/__main__.py)
 
 ## Development setup

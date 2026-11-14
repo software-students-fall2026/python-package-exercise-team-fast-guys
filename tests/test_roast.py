@@ -21,69 +21,81 @@ class Test:
             assert isinstance(actual, str), f"Expected roast_gpa() to return a string for gpa {g}. Instead, it returned {actual}"
             assert len(actual) > 0, f"Expected roast_gpa() not to be empty for gpa {g}. Instead, it returned a string with {len(actual)} characters"
 
-    def test_roast_gpa_sleep(self):
+    def test_roast_gpa_smart(self):
         '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 3.9
+        Verify roast_gpa() returns the expected value for a gpa above or equal to 3.9
         '''
-        actual = pyroast.roast_gpa(4.0)
-        assert actual == "I bet you've never known sleep before"
 
+        smart_roasts = [
+            "I bet you've never known sleep before",
+            "no network, no friends, just grind",
+            "your favorite past time must be studying",
+            "your blood must be pure energy drinks"
+        ]
+
+        actual = pyroast.roast_gpa(3.9)
+        assert actual in smart_roasts
+
+    def test_roast_gpa_average(self):
+        '''
+        Verify roast_gpa() returns the expected value for a gpa above or equal to 3.5
+        '''
     
-    def test_roast_gpa_smell(self):
-        '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 3.5
-        '''
-        actual = pyroast.roast_gpa(3.6)
-        assert actual == "I smell wasted potential"
+        average_roasts = [
+            "I smell wasted potential",
+            "mid doesn't cut it, you're just a statistic",
+            "yeah sure, you and everyone else",
+            "blends into the crowd so well, you become invisible"
+        ]
+    
+        actual = pyroast.roast_gpa(3.5)
+        assert actual in average_roasts
 
-    def test_roast_gpa_network(self):
+    def test_roast_gpa_below(self):
         '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 3.0
+        Verify roast_gpa() returns the expected value for a gpa above or equal to 2.0
         '''
-        actual = pyroast.roast_gpa(3.1)
-        assert actual == "Are you even trying? Or is college just a networking event for you?"
-
-    def test_roast_gpa_quit(self):
-        '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 2.5
-        '''
-        actual = pyroast.roast_gpa(2.6)
-        assert actual == "At this point, it might be better to give up"
-
-    def test_roast_gpa_choice(self):
-        '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 2.0
-        '''
-        actual = pyroast.roast_gpa(2.1)
-        assert actual == "I see you gave up, smartest choice you've ever made"
-
-    def test_roast_gpa_drop(self):
-        '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 1.5
-        '''
-        actual = pyroast.roast_gpa(1.9)
-        assert actual == "Gonna drop out soon?"
+        
+        below_roasts = [
+            "Are you even trying? Or is college just a networking event for you?",
+            "let me guess, business major?",
+            "let me guess, you think you're street smart and not book smart?",
+            "its a slipery slope, but you love living on the edge huh?"
+        ]
+        
+        actual = pyroast.roast_gpa(2.0)
+        assert actual in below_roasts
 
     def test_roast_gpa_low(self):
         '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 1.0
+        Verify roast_gpa() returns the expected value for a gpa above or equal to 1.0
         '''
-        actual = pyroast.roast_gpa(1.1)
-        assert actual == "McDonalds is always hiring"
+            
+        low_roasts = [
+            "at this point it would be better to drop out",
+            "McDonalds is always hiring",
+            "have you ever said I'm smart in my own way before?",
+            "honestly, it may be harder to get this low than it is to be average"
+        ]
+            
+        actual = pyroast.roast_gpa(1.0)
+        assert actual in low_roasts
 
-    def test_roast_gpa_lower(self):
+    def test_roast_gpa_bad(self):
         '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 0.5
+        Verify roast_gpa() returns the expected value for a gpa above or equal to 0.0
         '''
-        actual = pyroast.roast_gpa(0.9)
-        assert actual == "Your GPA is lower than my room temperature"
-
-    def test_roast_gpa_lowest(self):
-        '''
-        Verify roast_gpa() returns the expected message for a gpa higher than or equal to 0.0
-        '''
+                
+        bad_roasts = [
+            "I see you gave up, smartest choice you ever made",
+            "A gpa that low actually exists? Behold, the 8th wonder of the world",
+            "maybe you could be a youtuber?",
+            "how did you make it this far anyways?"
+        ]
+                
         actual = pyroast.roast_gpa(0.0)
-        assert actual == "A gpa that low actually exists? Behold the 8th wonder of the world!"
+        assert actual in bad_roasts
+    
 
     def test_roast_gpa_bounds(self):
         '''
